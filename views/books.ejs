@@ -1,0 +1,386 @@
+<!-- <%- include("partials/header") %>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f4f8;
+    padding: 1rem;
+    max-width: 900px;
+    margin: auto;
+    color: #52a9ff;
+    background-image: url("https://i.pinimg.com/736x/3c/5d/c7/3c5dc78836ff2ff54951b53b39de20be.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100vh;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+  }
+
+  a {
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #1c5980;
+  }
+
+  .add-book-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .add-book-link:hover {
+    background-color: #27ae60;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    background-color: #beebfe;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .book-cover {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 1.2rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .book-info {
+    flex-grow: 1;
+  }
+
+  .book-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-author {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-description {
+    font-size: 0.95rem;
+    color: #636e72;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 1.2rem;
+    }
+
+    li {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .book-cover {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .add-book-link {
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    .book-title {
+      font-size: 1.15rem;
+      text-align: center;
+    }
+
+    .book-author,
+    .book-description {
+      text-align: center;
+    }
+  }
+</style>
+
+<h2>📚 Book Collection</h2>
+
+<a href="/books/new" class="add-book-link">➕ Add New Book</a>
+<div class="Mybooks">
+<ul>
+  <% books.forEach(book => { %>
+    <li>
+      <img 
+        src="<%= book.coverImageURL ? book.coverImageURL : '/default-cover.jpg' %>" 
+        alt="Cover of <%= book.title %>" 
+        class="book-cover"
+        onerror="this.onerror=null;this.src='/default-cover.jpg';"
+      >
+      <div class="book-info">
+        <a href="/books/<%= book._id %>" class="book-title"><%= book.title %></a>
+        <div class="book-author">by <%= book.author %></div>
+        <% if (book.description) { %>
+          <div class="book-description"><%= book.description.substring(0, 120) %>...</div>
+        <% } %>
+      </div>
+    </li>
+  <% }) %>
+</ul>
+</div>
+
+<%- include("partials/footer") %> -->
+<%- include("partials/header") %>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f4f8;
+    padding: 1rem;
+    max-width: 900px;
+    margin: auto;
+    color: #52a9ff;
+    background-image: url("https://i.pinimg.com/736x/3c/5d/c7/3c5dc78836ff2ff54951b53b39de20be.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #1c5980;
+  }
+
+  .add-book-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #849ff7;
+    color: white;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .add-book-link:hover {
+    background-color: #ad81f4;
+   
+  }
+
+  .Mybooks {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+  width: 100%;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #d1eaf5;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(222, 204, 204, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.book-cover {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+  .book-info {
+    text-align: center;
+  }
+
+  .book-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-author {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-description {
+    font-size: 0.95rem;
+    color: #636e72;
+    line-height: 1.5;
+  }
+  .book-likes {
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .like-button {
+    padding: 0.4rem 0.8rem;
+    background-color: #f3baba;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .like-button:hover {
+    background-color: #f8baba;
+  }
+  
+  .like-count {
+    font-size: 0.95rem;
+    color: #2d3436;
+  }
+  
+
+  @media (max-width: 600px) {
+    body {
+      padding: 1.2rem;
+    }
+
+    .add-book-link {
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    .book-title {
+      font-size: 1.15rem;
+    }
+
+    .book-author,
+    .book-description {
+      text-align: center;
+    }
+
+    .book-cover {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<div class="Mybooks">
+  <ul>
+    <% books.forEach(book => { %>
+      <li>
+        <img 
+          src="<%= book.coverImageURL ? book.coverImageURL : '/default-cover.jpg' %>" 
+          alt="Cover of <%= book.title %>" 
+          class="book-cover"
+          onerror="this.onerror=null;this.src='/default-cover.jpg';"
+        >
+        <div class="book-info">
+          <a href="/books/<%= book._id %>" class="book-title"><%= book.title %></a>
+          <div class="book-author">by <%= book.author %></div>
+          <% if (book.description) { %>
+            <div class="book-description"><%= book.description.substring(0, 120) %>...</div>
+          <% } %>
+        </div>
+        <div class="book-likes">
+          <button class="like-button" data-id="<%= book._id %>">Like</button>
+          <span class="like-count" id="likes-<%= book._id %>"><%= book.likes || 0 %> likes</span>
+        </div>
+        
+      </li>
+    <% }) %>
+  </ul>
+</div>
+<a href="/books/new" class="add-book-link">➕ Add New Book</a>
+<script>
+  document.querySelectorAll('.like-button').forEach(button => {
+    button.addEventListener('click', async () => {
+      const bookId = button.getAttribute('data-id');
+      const response = await fetch(`/books/${bookId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      document.getElementById(`likes-${bookId}`).innerText = `${data.likes} likes`;
+    });
+  });
+</script>
+
+
+<%- include("partials/footer") %>

@@ -1,0 +1,472 @@
+<!-- <%- include("partials/header") %>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8;
+    color: #2d3436;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  h2 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    color: #7f8c8d;
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid #dcdde1;
+    margin: 2.5rem 0;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  ul li {
+    background-color: #ffffff;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+
+  ul li:hover {
+    transform: translateY(-3px);
+  }
+
+  form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  button {
+    padding: 0.9rem 1.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 1.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    form {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<h2><%= book.title %></h2>
+<h4>by <%= book.author %></h4>
+<p><%= book.description %></p>
+
+<hr>
+<h3>Reviews:</h3>
+<ul>
+  <% reviews.forEach(review => { %>
+    <li><strong><%= review.username %>:</strong> <%= review.comment %></li>
+  <% }) %>
+</ul>
+
+<h4>Add a Review:</h4>
+<form action="/books/<%= book._id %>/reviews" method="POST">
+  <input name="username" placeholder="Your name" required><br>
+  <textarea name="comment" placeholder="Write a review..." required></textarea><br>
+  <button type="submit">Submit</button>
+</form>
+
+<%- include("partials/footer") %> -->
+<!-- <%- include("partials/header") %>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafc;
+    color: #2c3e50;
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .book-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .book-header h2 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-header h4 {
+    font-size: 1.4rem;
+    color: #636e72;
+    margin-bottom: 1.5rem;
+  }
+
+  .book-header p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #3498db;
+    padding-left: 0.75rem;
+  }
+
+  .reviews-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+
+  .review-item {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid #2980b9;
+  }
+
+  .review-item strong {
+    color: #2980b9;
+    font-size: 1.05rem;
+  }
+
+  .review-item p {
+    margin-top: 0.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .review-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #ddd;
+  }
+
+  .review-form input,
+  .review-form textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .review-form input:focus,
+  .review-form textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  .review-form button {
+    padding: 0.9rem 1.6rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .review-form button:hover {
+    background-color: #2471a3;
+  }
+
+  @media (max-width: 600px) {
+    .book-header h2 {
+      font-size: 2rem;
+    }
+    .book-header h4 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="book-header">
+  <h2><%= book.title %></h2>
+  <h4>by <%= book.author %></h4>
+  <p><%= book.description %></p>
+  
+</div>
+
+<hr>
+
+<h3 class="section-title">Reviews:</h3>
+<ul class="reviews-list">
+  <% reviews.forEach(review => { %>
+    <li class="review-item">
+      <strong><%= review.username %></strong>
+      <p><%= review.comment %></p>
+    </li>
+  <% }) %>
+</ul>
+
+<h3 class="section-title">Add a Review:</h3>
+<form class="review-form" action="/books/<%= book._id %>/reviews" method="POST">
+  <input name="username" placeholder="Your name" required>
+  <textarea name="comment" rows="4" placeholder="Write a review..." required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<%- include("partials/footer") %> -->
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafc;
+    color: #2c3e50;
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .book-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .book-header h2 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-header h4 {
+    font-size: 1.4rem;
+    color: #636e72;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-header h5 {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+  }
+
+  .book-header p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #3498db;
+    padding-left: 0.75rem;
+  }
+
+  .reviews-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+
+  .review-item {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid #2980b9;
+  }
+
+  .review-item strong {
+    color: #2980b9;
+    font-size: 1.05rem;
+  }
+
+  .review-item .stars {
+    color: #f1c40f;
+    font-size: 1rem;
+  }
+
+  .review-item p {
+    margin-top: 0.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .review-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #ddd;
+  }
+
+  .review-form input,
+  .review-form textarea,
+  .review-form select {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .review-form input:focus,
+  .review-form textarea:focus,
+  .review-form select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  .review-form button {
+    padding: 0.9rem 1.6rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .review-form button:hover {
+    background-color: #2471a3;
+  }
+
+  @media (max-width: 600px) {
+    .book-header h2 {
+      font-size: 2rem;
+    }
+
+    .book-header h4 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="book-header">
+  <h2><%= book.title %></h2>
+  <h4>by <%= book.author %></h4>
+  <h5>Genre: <%= book.genre %></h5>
+  <p><%= book.description %></p>
+</div>
+
+<hr>
+
+<h3 class="section-title">Reviews:</h3>
+<ul class="reviews-list">
+  <% reviews.forEach(review => { %>
+    <li class="review-item">
+      <strong><%= review.username %></strong>
+      <div class="stars">
+        <%= '★'.repeat(review.rating || 0) %><%= '☆'.repeat(5 - (review.rating || 0)) %> (<%= review.rating %>/5)
+      </div>
+      <p><%= review.comment %></p>
+    </li>
+  <% }) %>
+</ul>
+
+<h3 class="section-title">Add a Review:</h3>
+<form class="review-form" action="/books/<%= book._id %>/reviews" method="POST">
+  <input name="username" placeholder="Your name" required>
+  
+  <label for="rating">Rating (1-5):</label>
+  <select name="rating" id="rating" required>
+    <option value="">Select</option>
+    <option value="1">1 ★</option>
+    <option value="2">2 ★★</option>
+    <option value="3">3 ★★★</option>
+    <option value="4">4 ★★★★</option>
+    <option value="5">5 ★★★★★</option>
+  </select>
+
+  <textarea name="comment" rows="4" placeholder="Write a review..." required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<%- include("partials/footer") %>
+

@@ -175,9 +175,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    
   }
-
   h2 {
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
@@ -353,8 +351,18 @@ li:hover {
     }
   }
 </style>
-
+ <div style="text-align: center; margin-top: 1rem;">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="🔍 Search by title or author..." 
+    style="padding: 0.6rem 1rem; width: 80%; max-width: 400px; border: 1px solid #ccc; border-radius: 6px;"
+  >
+</div>
 <div class="Mybooks">
+
+ 
+
   <ul>
     <% books.forEach(book => { %>
       <li>
@@ -426,6 +434,23 @@ li:hover {
       }
     });
   });
+
+  document.getElementById('searchInput').addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  const books = document.querySelectorAll('.Mybooks ul li');
+
+  books.forEach(book => {
+    const title = book.querySelector('.book-title').innerText.toLowerCase();
+    const author = book.querySelector('.book-author').innerText.toLowerCase();
+    
+    if (title.includes(query) || author.includes(query)) {
+      book.style.display = 'flex';
+    } else {
+      book.style.display = 'none';
+    }
+  });
+});
+
 </script>
 
 

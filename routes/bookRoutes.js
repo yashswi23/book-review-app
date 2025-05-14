@@ -49,4 +49,13 @@ router.post("/:id/reviews", async (req, res) => {
   res.redirect(`/books/${req.params.id}`);
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    await Book.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Book deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete the book' });
+  }
+});
+
 module.exports = router;
